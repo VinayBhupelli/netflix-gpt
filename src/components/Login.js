@@ -1,11 +1,89 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Header from "./Header";
 import BackgroundImage from "../utils/Background-image.jpg";
+import validate from "../utils/validate";
+import auth from "../utils/firebase";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 const Login = () => {
   const [isSignInForm, setSignInForm] = useState(true);
+  const [errorMess, setErrorMess] = useState("");
   const toggleSignInForm = () => {
     setSignInForm(!isSignInForm);
+  };
+  const dispatch = useDispatch();
+  const name = useRef(null);
+  const email = useRef(null);
+  const password = useRef(null);
+  const navigate = useNavigate();
+  const user = useSelector((store) => store.user);
+  if (user) navigate("/browse");
+  const handleValidation = () => {
+    // Validate the form data
+    const message = validate(email.current.value, password.current.value);
+    setErrorMess(message);
+    if (message) return;
+    if (!isSignInForm) {
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed Up
+          const user = userCredential.user;
+          console.log(user);
+          updateProfile(auth.currentUser, {
+            displayName: name.current.value,
+            photoURL:
+              "https://mir-s3-cdn-cf.behance.net/project_modules/disp/84c20033850498.56ba69ac290ea.png",
+          })
+            .then(() => {
+              const { uid, email, displayName, photoURL } = auth.currentUser;
+              dispatch(
+                addUser({
+                  uid: uid,
+                  email: email,
+                  displayName: displayName,
+                  photoURL: photoURL,
+                })
+              );
+              navigate("/browse");
+            })
+            .catch((error) => {
+              navigate("/error");
+            });
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMess(errorMessage);
+        });
+    } else {
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log(user);
+          navigate("/browse");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMess(errorMessage);
+        });
+    }
   };
   return (
     <div>
@@ -14,6 +92,9 @@ const Login = () => {
         <img src={BackgroundImage} alt="Background-img" />
       </div>
       <form
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
         className="flex flex-col absolute my-52 w-4/12 bg-black mx-auto left-0 right-0 text-white px-24 py-10 gap-5 bg-opacity-80"
         action=""
       >
@@ -22,6 +103,7 @@ const Login = () => {
         </p>
         {!isSignInForm && (
           <input
+            ref={name}
             type="name"
             placeholder="Full Name"
             name=""
@@ -30,6 +112,7 @@ const Login = () => {
           />
         )}
         <input
+          ref={email}
           type="email"
           placeholder="Email or phone Number"
           name=""
@@ -37,13 +120,20 @@ const Login = () => {
           className="p-2 m-2 bg-gray-500"
         />
         <input
+          ref={password}
           type="password"
           placeholder="Password"
           name=""
           id=""
           className="p-2 m-2 bg-gray-500"
         />
-        <button className="text-white p-2 m-2 bg-red-700">
+        {errorMess && (
+          <p className="p-2 text-red-600 font-bold text-lg">{errorMess}</p>
+        )}
+        <button
+          className="text-white p-2 m-2 bg-red-700"
+          onClick={handleValidation}
+        >
           {isSignInForm ? "Sign In" : "Sign Up"}
         </button>
         <p className="p-2" onClick={toggleSignInForm}>

@@ -1,10 +1,23 @@
+> Reading Documentation is the super power of a developer
+
 ### Project Flow
 
 - Create-react-app
 - Add Tailwind CSS
 - Header
+- Routing of App
 - Login Form
 - Sign Up Form
+- Form Validation
+- useRef Hook
+- Firebase Setup
+- Deploying app to production
+- signup user account
+- Implement Sign In User API
+- Created Redux store with UserSlice
+- Implemented SignOut
+- Updating Profile
+- Fetch From TMDB movies
 
 ### Important Topics
 
@@ -13,7 +26,15 @@
 - Delete test.js files
 - remove css from App.css & index.css
 - [Tailwind]https://tailwindcss.com/docs/guides/create-react-app
-- npm i -D react-router-dom    
+- npm i -D react-router-dom   
+- npm install firebase 
+- npm install -g firebase-tools
+- firebase login
+- firebase init
+- npm run build
+- firebase deploy
+- npm i -D @reduxjs/toolkit
+- npm i -D react-redux
 
 ### Features
 
