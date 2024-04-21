@@ -17,7 +17,19 @@
 - Created Redux store with UserSlice
 - Implemented SignOut
 - Updating Profile
+- BugFix: SignUp displayName issue
+- BuxFix: Routing while signup/signin 
+- Unsubscribed to onAuthChange
+- Adding harcoded values to constants 
+- Creating TMDB API
 - Fetch From TMDB movies
+- Get data from API call
+- create custom Hook for NowPlayingMovies
+- Update the store by creating MovieSlice
+- Planning for Main&secondary Container
+- Fetch Trailer video & Update the store
+- Embeded the Youtube & make it mute and full screen
+- Wrote Tailwind CSS for Main container
 
 ### Important Topics
 
