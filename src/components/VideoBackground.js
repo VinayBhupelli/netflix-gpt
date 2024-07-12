@@ -3,10 +3,10 @@ import useMovieTrailer from "../hooks/useMovieTrailer";
 import { useSelector } from "react-redux";
 
 const VideoBackground = ({ movieId }) => {
-  console.log("Video background");
+  // console.log("Video background");
   useMovieTrailer({ movieId });
   const trailer = useSelector((store) => store.movies.trailerVideo);
-  console.log(trailer);
+  // console.log(trailer);
   return (
     <div className="bg-gradient-to-b from-black">
       <iframe

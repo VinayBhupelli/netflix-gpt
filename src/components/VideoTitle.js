@@ -1,7 +1,7 @@
 import React from "react";
 
 const VideoTitle = ({ title, overview }) => {
-  console.log("Video Title");
+  // console.log("Video Title");
   const addEllipsis = (text, maxWords) => {
     const words = text.split(" ");
     if (words.length > maxWords) {
