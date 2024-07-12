@@ -83,13 +83,17 @@ const Login = () => {
     <div>
       <Header />
       <div className="absolute">
-        <img src={BackgroundImage} alt="Background-img" />
+        <img
+          className="h-screen w-screen object-cover"
+          src={BackgroundImage}
+          alt="Background-img"
+        />
       </div>
       <form
         onSubmit={(e) => {
           e.preventDefault();
         }}
-        className="flex flex-col absolute my-52 w-4/12 bg-black mx-auto left-0 right-0 text-white px-24 py-10 gap-5 bg-opacity-80"
+        className="absolute flex flex-col my-52 bg-black mx-auto left-0 right-0 text-white px-24 py-10 gap-5 bg-opacity-80 sm:w-8/12 md:6/12 lg:w-5/12  xl:w-5/12 "
         action=""
       >
         <p className="p-2 text-3xl font-bold">

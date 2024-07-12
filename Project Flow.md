@@ -30,7 +30,11 @@
 - Fetch Trailer video & Update the store
 - Embeded the Youtube & make it mute and full screen
 - Wrote Tailwind CSS for Main container
-
+- Seconday Container with images 
+- GPT Search Page
+- GPT Search Bar
+- Language option selection
+- 
 ### Important Topics
 
 - Create react app uses Webpack for bundling
@@ -47,6 +51,7 @@
 - firebase deploy
 - npm i -D @reduxjs/toolkit
 - npm i -D react-redux
+- npm install --save openai
 
 ### Features
 
